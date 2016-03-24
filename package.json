@@ -1,0 +1,26 @@
+{
+  "name": "starhs-api",
+  "version": "0.9.3",
+  "description": "API definition for the staRHs backend. Copied from https://anypoint.mulesoft.com/apiplatform/digitalbauhaus-gmbh/#/portals/organizations/521edd2a-03e7-45ec-901c-fb43ca545048/apis/39716/versions/45818/pages/54810",
+  "main": "make",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ResourcefulHumans/staRHs-api.git"
+  },
+  "keywords": [
+    "staRHs",
+    "API"
+  ],
+  "author": "Resourceful Humans <info@resourceful-humans.com>",
+  "license": "UNLICENSED",
+  "bugs": {
+    "url": "https://github.com/ResourcefulHumans/staRHs-api/issues"
+  },
+  "homepage": "https://github.com/ResourcefulHumans/staRHs-api#readme",
+  "dependencies": {
+    "raml2html": "^2.4.0"
+  }
+}

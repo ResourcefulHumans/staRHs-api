@@ -1,0 +1,1222 @@
+#%RAML 0.8
+title: RH-StaRHs
+version: V0.93
+baseUri: https://services.digital-bauhaus.solutions/RH-API/{version}
+mediaType: application/json
+protocols: [HTTPS]
+
+/session:
+  displayName: Session
+  description: Namespace for SessionHandling
+  /get-LoginToken:
+    description: --DevStatus ready to use--<br/> If you want to interact with the API, you first have to request a LoginToken. Within 1 Minute you have to use this LoginToken to Login to the API. If you don't login in this timespan, the LoginToken get's invalid. After a login succeeded, you get a SessionToken to fire up requests to the API. 
+    get:
+      headers:
+        APIKey:
+          description: API Key for using the API
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+        APIUser:
+          description: API User using the API, not the Login-User!
+          type: string
+          required: true
+          example: IOSDeveloper
+        APIPassword:
+          description: API Password for using the API, not the Login- Password!
+          type: string
+          required: true
+          example: xa4g&z76!
+      queryParameters:
+      responses:
+        200:
+          description: OK, here is the LoginToken to login to the API
+          body:
+            application/json:
+              example: |
+                {
+                  "LoginToken":"fb25f168-68f7-45f3-b029-3491b6c7ee8d"
+                }
+        500:
+          description: Error, see description
+  /login-with-userid:
+    description: --DevStatus ready to use--<br/> Login with UserID and password. If the combination of UserID and password is found you will get a valid SessionToken.  
+    post:
+      headers:
+        LoginToken:
+          description: LoginToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2        
+        UserID:
+          description: Userid StaRHs User
+          type: string
+          required: true
+          example: pmustermann
+        Password:
+          description: Password StaRHs User
+          type: string
+          required: true
+          example: 1234
+      queryParameters:
+      responses:
+        200:
+          description: OK, Login succeeded, here is the SessionToken
+          body:
+            application/json:
+              example: |
+                {
+                  "LoginToken":"3f440293-ac48-4d88-81ab-2d3609ce45c4",
+                  "SessionToken":"c612b276-9dc3-4661-81de-c67a40be8d73",
+                  "SessionTimeout":60,
+                  "SessionTokenValidUntil":"2015-11-27T11:40:28.8081349+01:00",
+                  "DataMode":1
+                }
+        500:
+          description: Error, see description
+  /login-with-email:
+    description: --DevStatus ready to use--<br/> Login with EMailAdress and password. If the combination of EMailAdress and password is found you will get a valid SessionToken.  
+    post:
+      headers:
+        LoginToken:
+          description: LoginToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2        
+        EMail:
+          description: EMail
+          type: string
+          required: true
+          example: info@abc.com
+        Password:
+          description: Password
+          type: string
+          required: true
+          example: 1234
+      queryParameters:
+      responses:
+        200:
+          description: OK, Login succeeded, here is the SessionToken
+          body:
+            application/json:
+              example: |
+                {
+                  "LoginToken":"3f440293-ac48-4d88-81ab-2d3609ce45c4",
+                  "SessionToken":"c612b276-9dc3-4661-81de-c67a40be8d73",
+                  "SessionTimeout":60,
+                  "SessionTokenValidUntil":"2015-11-27T11:40:28.8081349+01:00",
+                  "DataMode":1
+                }
+        500:
+          description: Error, see description
+  /logout:
+    description: --DevStatus ready to use--<br/> Method logsout the user and will end the Session that is connected with the actual SessionToken.  
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+      responses:
+        200:
+          description: OK, Logout succeeded.
+          body:
+            application/json:
+              example: |
+                {
+                  "data": 
+                    {
+                    "Result": "OK, User has been loged out"
+                    }
+                    , 
+                  "success": true,
+                  "status": 200
+                }
+        400:
+          description: Bad Request
+        401:
+          description: Unauthorized 
+  /set-SessionTimeout:
+    description: --DevStatus ready to use--<br/> To interact with the API you need a valid SessionToken. By default the inactivity-time of a sesion is 60 minutes. So if a user does not interact with the API for 60 minutes the session get's invalid and the user has to Login again (and before this, he has to request a new LoginToken). You can set the session-timeout to 0 (the session expires immediately, x (any int value, the session expires after x minutes).
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        newsessiontimeout:
+          description: The value for the new session-timeout in minutes
+          type: integer
+          required: true
+          example: 15
+      responses:
+        200:
+          description: OK, SessionTimeout was set
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"OK, new SessionTimeout set to 125"
+                }
+        500:
+          description: Error, see description
+  /get-SessionInfo:
+    description: --DevStatus ready to use--<br/> Method gives you information about the actual Session.
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+      responses:
+        200:
+          description: OK, here is the Info for your Session
+          body:
+            application/json:
+              example: |
+                {
+                  "LoginToken":"52849ef1-f430-4f7f-84ea-0db25fffed43",
+                  "SessionToken":"b2a24c15-b2fe-4e6a-b818-d15617a88332",
+                  "SessionTimeout":125,
+                  "SessionTokenValidUntil":"2015-11-27T13:37:21.53",
+                  "DataMode":-1
+                }
+        500:
+          description: Error, see description
+  /set-DataMode:
+    description: --DevStatus ready to use--<br/> The API supports three DataModes. If you set the value to 1 (default) you will interact with the life-database, if you set the value to -1 you will interact with the PreProd-database and if you set the value to 0 you only get example-data.
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        newdatamode:
+          description: New DataMode value 
+          type: integer
+          required: true
+          example: 0
+      responses:
+        200:
+          description: OK, DataMode was set
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"OK, new DataMode set to -1 (PreProd Data)"
+                }
+        500:
+          description: Error, see description
+/profile:
+  displayName: Profile
+  description: Namespace for Profile of the actual User
+  /get-PKUserFromUserID:
+    description: --DevStatus ready to use--<br/> This method gives back the PK of a given userid. This will be needed for recovering the password with get-new-password
+    get:
+      headers:
+        APIKey:
+          description: API Key for using the API
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+        APIUser:
+          description: API User using the API, not the Login-User!
+          type: string
+          required: true
+          example: IOSDeveloper
+        APIPassword:
+          description: API Password for using the API, not the Login- Password!
+          type: string
+          required: true
+          example: xa4g&z76!
+        UserID:
+          description: Userid StaRHs User
+          type: string
+          required: true
+          example: pmustermann 
+      responses:
+        200:
+          description: OK, here ist the PK
+          body:
+            application/json:
+              example: |
+                {
+                  "PKUser":"0b8ffafb-8656-46f4-ab0e-23d81c6b6f6d"
+                }
+        500:
+          description: Error, see description
+  /get-new-password:
+    description: --DevStatus ready to use--<br/> This method generates a new password and sends it to the user.
+    get:
+      headers:
+        APIKey:
+          description: API Key for using the API
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+        APIUser:
+          description: API User using the API, not the Login-User!
+          type: string
+          required: true
+          example: IOSDeveloper
+        APIPassword:
+          description: API Password for using the API, not the Login- Password!
+          type: string
+          required: true
+          example: xa4g&z76!
+        PKUser:
+          description: PKUser StaRHs User
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+      responses:
+        200:
+          description: OK, New Password has been send to the user
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"A new Password has been send"
+                }
+        500:
+          description: Error, see description
+  /set-new-password:
+    description: --DevStatus ready to use--<br/> Method takes the new password and stores it in the database. The validation of the password has to be done in the UI. Before changing the password, the user has to login.
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+        OldPassword:
+          description: Old password of the user, who is logged in 
+          type: string
+          required: true
+          example: myOldPassword
+        NewPassword:
+          description: New password for the user, who is logged in 
+          type: string
+          required: true
+          example: myNewPassword
+      responses:
+        200:
+          description: OK, new password has been saved
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"The new Password has been saved"
+                }
+        500:
+          description: Error, see description
+  /get-userid:
+    description: --DevStatus ready to use--<br/> Method tries to find the userid for a given E-Mail and sends the userid to this E-Mail.
+    get:
+      headers:
+        APIKey:
+          description: API Key for using the API
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+        APIUser:
+          description: API User using the API, not the Login-User!
+          type: string
+          required: true
+          example: IOSDeveloper
+        APIPassword:
+          description: API Password for using the API, not the Login- Password!
+          type: string
+          required: true
+          example: xa4g&z76!
+        EMail:
+          description: The eMailAdress of the user, who want's to recover his userid 
+          type: string
+          required: true
+          example: myNewPassword
+      responses:
+        200:
+          description: OK, userid was found and send to the user
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"A UserID has been send"
+                }
+        500:
+          description: Error, see description
+  /get-Profile:
+    description: --DevStatus ready to use--<br/> Gives information about the actual user. User has to be logged in to call this method.
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      responses:
+        200:
+          description: OK, here is the Info of the user
+          body:
+            application/json:
+              example: |
+                {
+                  "PKUser":"0b8ffafb-8656-46f4-ab0e-23d81c6b6f6d",
+                  "MapID":0,
+                  "Kunde1":"Resourceful Humans",
+                  "Kunde2":"",
+                  "Salutation":"",
+                  "Title":"",
+                  "Forename":"Thomas",
+                  "Name":"Reichert",
+                  "Function":null,
+                  "Telephone":"",
+                  "EMail":"thomas.reichert@digital-bauhaus.de",
+                  "MobilePhone":"",
+                  "Profile":"",
+                  "UserID":"abc",
+                  "InformByMail":true,
+                  "URLPicture":"http://starhs.net/profileimgs/054c4c50-c088-4ebf-8516-78bf8048e400.jpg",
+                  "Timezone":132, 
+                  "UserCanInvite":true,
+                  "ShowStarMap":true,
+                  "Feature1":"1",
+                  "Feature2":"2",
+                  "Feature3":"3",
+                  "Feature4":"4",
+                  "Feature5":"5",
+                  "Feature6":"6",
+                  "Feature7":"7",
+                  "Feature8":"8",
+                  "Feature9":"9",
+                  "Feature10":"10",
+                  "FeatureName1":"Abteilung",
+                  "FeatureName2":"Geschlecht",
+                  "FeatureName3":"Alter",
+                  "FeatureName4":"",
+                  "FeatureName5":"",
+                  "FeatureName6":"",
+                  "FeatureName7":"",
+                  "FeatureName8":"",
+                  "FeatureName9":"",
+                  "FeatureName10":""
+                } 
+        500:
+          description: Error, see description
+  /set-Profile:
+    description: --DevStatus ready to use--<br/> Method updates the User-Profile with given information. User has to be logged in to call this method.  
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        Salutation:
+          description: Salutation
+          type: string
+          required: true
+          example: Mr.
+        Title:
+          description: Title
+          type: string
+          required: true
+          example: Prof. Dr.
+        Forename:
+          description: Forename
+          type: string
+          required: true
+          example: Peter
+        Name:
+          description: Name
+          type: string
+          required: true
+          example: Mustermann
+        Telephone:
+          description: Telephone
+          type: string
+          required: true
+          example: +49 170 1234567
+        EMail:
+          description: EMail
+          type: string
+          required: true
+          example: info@abc.com
+        MobilePhone:
+          description: MobilePhone
+          type: string
+          required: true
+          example: +49 170 1234567
+        Profile:
+          description: Profile of the user
+          type: string
+          required: true
+          example: Mr. Peter Mustermann is Head of....
+        InformByMail:
+          description: Does the user want's to be informed per mail
+          type: boolean
+          required: true
+          example: true
+        Feature1:
+          description: Feature 1 value
+          type: string
+          required: true
+          example: Feature 1 value
+        Feature2:
+          description: Feature 2 value
+          type: string
+          required: true
+          example: Feature 2 value
+        Feature3:
+          description: Feature 3 value
+          type: string
+          required: true
+          example: Feature 3 value
+        Feature4:
+          description: Feature 4 value
+          type: string
+          required: true
+          example: Feature 4 value
+        Feature5:
+          description: Feature 5 value
+          type: string
+          required: true
+          example: Feature 5 value
+        Feature6:
+          description: Feature 6 value
+          type: string
+          required: true
+          example: Feature 6 value
+        Feature7:
+          description: Feature 7 value
+          type: string
+          required: true
+          example: Feature 7 value
+        Feature8:
+          description: Feature 8 value
+          type: string
+          required: true
+          example: Feature 8 value
+        Feature9:
+          description: Feature 9 value
+          type: string
+          required: true
+          example: Feature 9 value
+        Feature10:
+          description: Feature 10 value
+          type: string
+          required: true
+          example: Feature 10 value
+      responses:
+        200:
+          description: OK, Userinfo has been updated
+          body:
+            application/json:
+              example: |
+                {
+                 "Message":"Userdata has been updated"
+                }
+        500:
+          description: Error, see description
+  /get-ProfilePicture:
+    description: --DevStatus ready to use--<br/> Method gives the URL of the User-Picture (if specified). Otherwise an empty string will be returned. User has to be logged in to call this method. 
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+      responses:
+        200:
+          description: OK, here is the Picture URL
+          body:
+            application/json:
+              example: |
+                {
+                  "URLPicture":"http://starhs.net/profileimgs/054c4c50-c088-4ebf-8516-78bf8048e400.jpg"
+                }
+        500:
+          description: Error, see description
+  /set-ProfilePicture:
+    description: --DevStatus concept--<br/> Method takes a Picture-File and saves it to the profile of the user. User has to be logged in to call this method. 
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        Picture:
+          description: Picture 
+          type: string
+          required: true
+          example: 
+      responses:
+        200:
+          description: OK, new picture was saved 
+          body:
+            application/json:
+              example: |
+                {
+                  "data": 
+                    {
+                    "Result": "OK, new picture was saved"
+                    }
+                    , 
+                  "success": true,
+                  "status": 200
+                }
+        500:
+          description: Error, see description
+  /get-ClientInfos:
+    description: --DevStatus ready to use--<br/> Method gives information about the client of the actual user. User has to be logged in to call this method. 
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+      responses:
+        200:
+          description: OK, here is the Info for the client
+          body:
+            application/json:
+              example: |
+                {
+                    "PKKunde":"08c5e90b-80b6-4245-b592-ccbc2a091634",
+                    "Kunde1":"Resourceful Humans",
+                    "Kunde2":"",
+                    "ShowOwnLogo":false,
+                    "URLPicture":"",
+                    "FeatureName1":"Abteilung",
+                    "FeatureName2":"Geschlecht",
+                    "FeatureName3":"Alter",
+                    "FeatureName4":"",
+                    "FeatureName5":"",
+                    "FeatureName6":"",
+                    "FeatureName7":"",
+                    "FeatureName8":"",
+                    "FeatureName9":"",
+                    "FeatureName10":""
+                }
+        500:
+          description: Error, see description
+  /get-ClientPicture:
+    description: --DevStatus ready to use--<br/> Method gives the URL of the Client-Picture (if specified). Otherwise an empty string will be returned. User has to be logged in to call this method. 
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+      responses:
+        200:
+          description: OK, here is the Info for your Session
+          body:
+            application/json:
+              example: |
+                {
+                  "ShowOwnLogo":false,
+                  "URLPicture":""
+                }
+        500:
+          description: Error, see description
+  /get-ClientEmployees:
+    description: --DevStatus ready to use--<br/> Method gives a collection of all the users of the actual client. User has to be logged in to call this method.
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        RecordCount:
+          description: Number of Records, the service should give; default is -1 (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by name. 
+          type: integer
+          required: false
+          example: 1000
+        RecordStart:
+          description: see parameter RecordCount 
+          type: string
+          required: false
+          example: ert
+      responses:
+        200:
+          description: OK, here's the list of users
+          body:
+            application/json:
+              example: |
+                {
+                  "employees":
+                  [
+                    {
+                      "PKUser":"0b8ffafb-8656-46f4-ab0e-23d81c6b6f6d",
+                      "MapID":1,
+                      "Salutation":"",
+                      "Title":"",
+                      "Forename":"",
+                      "Name":"",
+                      "Function":"",
+                      "Telephone":"",
+                      "EMail":"",
+                      "MobilePhone":"",
+                      "Profile":"",
+                      "UserID":"",
+                      "InformByMail":true,
+                      "URLPicture":""
+                    },
+                    {
+                      "PKUser":"0b8ffafb-8656-46f4-ab0e-23d81c6b6f6d",
+                      "MapID":1,
+                      "Salutation":"",
+                      "Title":"",
+                      "Forename":"",
+                      "Name":"",
+                      "Function":"",
+                      "Telephone":"",
+                      "EMail":"",
+                      "MobilePhone":"",
+                      "Profile":"",
+                      "UserID":"",
+                      "InformByMail":true,
+                      "URLPicture":""
+                    },
+                    {
+                      "PKUser":"0b8ffafb-8656-46f4-ab0e-23d81c6b6f6d",
+                      "MapID":1,
+                      "Salutation":"",
+                      "Title":"",
+                      "Forename":"",
+                      "Name":"",
+                      "Function":"",
+                      "Telephone":"",
+                      "EMail":"",
+                      "MobilePhone":"",
+                      "Profile":"",
+                      "UserID":"",
+                      "InformByMail":true,
+                      "URLPicture":""
+                    }
+                  ]
+                }
+        500:
+          description: Error, see description
+/starhs:
+  displayName: StaRHs
+  description: Namespace for StaRHs
+  /get-StarhsStatus:
+    description: --DevStatus ready to use--<br/> Method gives information about the StaRHs-Status of the actual client and user
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+      responses:
+        200:
+          description: OK, here is the staRHs info for you and your client
+          body:
+            application/json:
+              example: |
+                {
+                  "PKUser":"0b8ffafb-8656-46f4-ab0e-23d81c6b6f6d",
+                  "PKClient":"08c5e90b-80b6-4245-b592-ccbc2a091634",
+                  "Forename":"Thomas",
+                  "Name":"Reichert",
+                  "Kunde1":"Resourceful Humans",
+                  "Kunde2":"",
+                  "CycleFrom":"2015-11-23T00:00:00",
+                  "CycleTo":"2015-11-29T23:59:00",
+                  "CycleType":"week",
+                  "CycleName":"",
+                  "CycleStaRHsToShare":10,
+                  "YouHaveShared":0,
+                  "YouHaveReceived":3,
+                  "YouHaveLeft":10
+                }
+        500:
+          description: Error, see description
+  /get-StarhsShared:
+    description: --DevStatus ready to use--<br/> Method gives a collection of the shared staRHs within a given timespan for the actual user
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        DateFrom:
+          description: Timespan start
+          type: date
+          required: true
+          example: 2015-01-01
+        DateTo:
+          description: Timespan end
+          type: date
+          required: true
+          example: 2015-12-31
+        RecordCount:
+          description: Number of Records, the service should give; default is empty (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by date desc. 
+          type: integer
+          required: false
+          example: 1000
+        RecordStart:
+          description: see parameter RecordCount 
+          type: date
+          required: false
+          example: 2015-01-01
+        DateFromTime:
+          description: Timespan start time
+          type: string
+          required: false
+          example: "10:00:00"
+        DateToTime:
+          description: Timespan end time
+          type: string
+          required: false
+          example: "18:00:00"
+      responses:
+        200:
+          description: OK, here is the List of your staRHs
+          body:
+            application/json:
+              example: |
+                {
+                  "data": 
+                    [
+                      {"To":"Peter Mustermann","ToID":"bdacc958-0db9-4804-9b4a-a3bdc3e0c60c","ToURLPicture":"https://starhs.net/profileimg/abc.jpg","No":"1","Reason":"Your support on...","Date":"10.11.2015 21:43:00"},
+                      {"To":"Peter Mustermann","ToID":"bdacc958-0db9-4804-9b4a-a3bdc3e0c60c","ToURLPicture":"https://starhs.net/profileimg/abc.jpg","No":"1","Reason":"Your support on...","Date":"10.11.2015 21:43:00"},
+                      {"To":"Peter Mustermann","ToID":"bdacc958-0db9-4804-9b4a-a3bdc3e0c60c","ToURLPicture":"https://starhs.net/profileimg/abc.jpg","No":"1","Reason":"Your support on...","Date":"10.11.2015 21:43:00"},
+                      {"To":"Peter Mustermann","ToID":"bdacc958-0db9-4804-9b4a-a3bdc3e0c60c","ToURLPicture":"https://starhs.net/profileimg/abc.jpg","No":"1","Reason":"Your support on...","Date":"10.11.2015 21:43:00"},
+                    ]
+                    , 
+                  "success": true,
+                  "status": 200
+                }
+        500:
+          description: Error, see description
+  /get-StarhsReceived:
+    description: --DevStatus ready to use--<br/> Method gives a collection of the received stRHs within a given timespan for the actual user
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        DateFrom:
+          description: Timespan start
+          type: date
+          required: true
+          example: 2015-01-01
+        DateTo:
+          description: Timespan end
+          type: date
+          required: true
+          example: 2015-12-31
+        RecordCount:
+          description: Number of Records, the service should give; default is empty (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by date desc. 
+          type: integer
+          required: false
+          example: 1000
+        RecordStart:
+          description: see parameter RecordCount 
+          type: date
+          required: false
+          example: 2015-01-01
+        DateFromTime:
+          description: Timespan start time
+          type: string
+          required: false
+          example: "10:00:00"
+        DateToTime:
+          description: Timespan end time
+          type: string
+          required: false
+          example: "18:00:00"
+      responses:
+        200:
+          description: OK, here is the List of your staRHs
+          body:
+            application/json:
+              example: |
+                [
+                  {
+                    "From":"Christopher Warnow",
+                    "FromID":"fba71a32-6709-4f0c-afc7-d732bddc574e",
+                    "FromURLPicture":"https://starhs.net/profileimg/f019e1f4-aa53-4243-b180-af27f072f1ad.jpg",
+                    "No":5,
+                    "Reason":"",
+                    "Date":"2015-11-30T15:26:00"
+                  },
+                  {
+                    "From":"Christopher Warnow",
+                    "FromID":"fba71a32-6709-4f0c-afc7-d732bddc574e",
+                    "FromURLPicture":"https://starhs.net/profileimg/f019e1f4-aa53-4243-b180-af27f072f1ad.jpg",
+                    "No":5,
+                    "Reason":"",
+                    "Date":"2015-11-30T15:26:00"
+                  }
+                ]
+        500:
+          description: Error, see description
+  /share-Starh:
+    description: --DevStatus ready to use--<br/> Method takes information for sharing a staRH and stores it in the database. If the user who gets the staRH want's to be informed by the system, an email will be generated
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        ToID:
+          description: GUID of user who will get the staRH 
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 21fa040d-9073-4928-b3f9-6839b384f169
+        NoOfStaRHs:
+          description: No of staRHs the user will get
+          type: integer
+          required: true
+          example: 3
+        Message:
+          description: Message for sharing the staRH
+          type: string
+          required: true
+          example: Thanks for your support!
+      responses:
+        200:
+          description: OK, staRH was send
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"StaRHs have been shared"
+                }
+        500:
+          description: Error, see description
+/push:
+  displayName: Push
+  description: Namespace for ApplePushNotification
+  /RegisterDevice:
+    description: --DevStatus concept--<br/> Method to register a new apple-device for a given user 
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        DeviceID:
+          description: ID of the apple device that should be registered 
+          type: string
+          required: true
+          example: 21fa040d-9073-4928-b3f9-6839b384f169
+      responses:
+        200:
+          description: OK, Device registered
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"OK, Device registered"
+                }
+        500:
+          description: Error, see description
+  /UnRegisterDevice:
+    description: --DevStatus concept--<br/> Method to unregister an apple-device of a user
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+        DeviceID:
+          description: ID of the apple device that should be unregistered 
+          type: string
+          required: true
+          example: 21fa040d-9073-4928-b3f9-6839b384f169
+      responses:
+        200:
+          description: OK, Device unregistered
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"OK, Device unregistered"
+                }
+        500:
+          description: Error, see description
+  /ResetBadgeCount:
+    description: --DevStatus concept--<br/> Method to reset the badge-Count of a user
+    post:
+      headers:
+        SessionToken:
+          description: SessionToken
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+      queryParameters:
+      responses:
+        200:
+          description: OK, badge-Count was resetted
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"OK, badge-Count was resetted"
+                }
+        500:
+          description: Error, see description
+  /Push-StarWithoutLogin:
+    description: --DevStatus concept--<br/> Generate Push-Notification without login
+    post:
+      headers:
+        APIKey:
+          description: API Key for using the API
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+        APIUser:
+          description: API User using the API, not the Login-User!
+          type: string
+          required: true
+          example: IOSDeveloper
+        APIPassword:
+          description: API Password for using the API, not the Login- Password!
+          type: string
+          required: true
+          example: xa4g&z76!
+      queryParameters:
+        Starid:
+          description: ID of the given staRH
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+      responses:
+        200:
+          description: StaRHs have been pushed to all devices for this user
+          body:
+            application/json:
+              example: |
+                {
+                  "Message":"StaRHs have been pushed to all devices for this user"
+                }
+        500:
+          description: Error, see description
+
+/map:
+  displayName: Map
+  description: Namespace for StaRHMap
+  /get-MapDataWithoutLogin:
+    description: --DevStatus ready to use--<br/> Method gives the information which is necessary for rendering the staRHMap
+    get:
+      headers:
+        APIKey:
+          description: API Key for using the API
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+        APIUser:
+          description: API User using the API, not the Login-User!
+          type: string
+          required: true
+          example: IOSDeveloper
+        APIPassword:
+          description: API Password for using the API, not the Login- Password!
+          type: string
+          required: true
+          example: xa4g&z76!
+      queryParameters:
+        ClientGUID:
+          description: Client for which the data should be selected
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 590df105-200c-4851-aa9c-d5a10ea6c8f0
+        datefrom:
+          description: From
+          type: date
+          required: true
+          example: 2015-1-1
+        dateto:
+          description: To
+          type: date
+          required: true
+          example: 2015-1-1
+        datefromtime:
+          description: FromTime
+          type: string
+          required: false
+          example: 10:00:00
+        datetotime:
+          description: ToTime
+          type: string
+          required: false
+          example: 10:00:00
+      responses:
+        200:
+          description: OK, here is the data for the map
+          body:
+            application/json:
+              example: |
+                {
+                  "nodes":
+                    [
+                      {"id":"ea60d2be-c235-48f3-aa3f-faf99b45bc3f","label":"Peter Mustermann","function":"CEO","attributes":[{"Abteilung":"HR"},{"Geschlecht":"männlich"},{"Alter","30"}]},
+                      {"id":"ea60d2be-c235-48f3-aa3f-faf99b45bc3f","label":"Peter Mustermann","function":"CEO","attributes":[{"Abteilung":"HR"},{"Geschlecht":"männlich"},{"Alter","30"}]},
+                      {"id":"ea60d2be-c235-48f3-aa3f-faf99b45bc3f","label":"Peter Mustermann","function":"CEO","attributes":[{"Abteilung":"HR"},{"Geschlecht":"männlich"},{"Alter","30"}]},
+                      {"id":"ea60d2be-c235-48f3-aa3f-faf99b45bc3f","label":"Peter Mustermann","function":"CEO","attributes":[{"Abteilung":"HR"},{"Geschlecht":"männlich"},{"Alter","30"}]},
+                    ],
+                  "edges":
+                    [
+                      {"id": "e0","source": "72e0faf8-f9fb-485e-89e1-061e46c57f27","target": "c9614a92-868b-4cfa-b6c7-b638082e595e","size": "5","date": "2014-11-11T10:32:00Z"},
+                      {"id": "e1","source": "49b2749d-ab97-4763-ab60-0cd0ffe817b1","target": "6fc2e448-ac57-4c95-8676-6435359c1697","size": "5","date": "2014-11-14T18:54:00Z"},
+                      {"id": "e2","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "d01af8dc-5d5f-4679-85ee-286b715bcbfb","size": "3","date": "2014-10-31T11:33:00Z"},
+                      {"id": "e3","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "452f1e1d-f8ee-4ade-a569-2c8392e310c2","size": "2","date": "2014-10-31T11:30:00Z"}                    
+                    ]
+                }
+        500:
+          description: Error, see description
+  /get-MapDataWithSession:
+    description: --DevStatus ready to use--<br/> Method gives the information which is necessary for rendering the staRHMap
+    get:
+      headers:
+        SessionToken:
+          description: SessionToken for using the API
+          type: string
+          minLength: 36
+          maxLength: 36
+          required: true
+          example: 21fa040d-9073-4928-b3f9-6839b384f169
+      queryParameters:
+        datefrom:
+          description: From
+          type: date
+          required: true
+          example: 2015-1-1
+        dateto:
+          description: To
+          type: date
+          required: true
+          example: 2015-1-1
+        datefromtime:
+          description: FromTime
+          type: string
+          required: false
+          example: 10:00:00
+        datetotime:
+          description: ToTime
+          type: string
+          required: false
+          example: 10:00:00
+      responses:
+        200:
+          description: OK, here is the data for the map
+          body:
+            application/json:
+              example: |
+                {
+                  "nodes":
+                    [
+                      {"id":"ea60d2be-c235-48f3-aa3f-faf99b45bc3f","label":"Peter Mustermann","function":"CEO","attributes":[{"Abteilung":"HR"},{"Geschlecht":"männlich"},{"Alter","30"}]},
+                      {"id":"ea60d2be-c235-48f3-aa3f-faf99b45bc3f","label":"Peter Mustermann","function":"CEO","attributes":[{"Abteilung":"HR"},{"Geschlecht":"männlich"},{"Alter","30"}]},
+                      {"id":"ea60d2be-c235-48f3-aa3f-faf99b45bc3f","label":"Peter Mustermann","function":"CEO","attributes":[{"Abteilung":"HR"},{"Geschlecht":"männlich"},{"Alter","30"}]},
+                      {"id":"ea60d2be-c235-48f3-aa3f-faf99b45bc3f","label":"Peter Mustermann","function":"CEO","attributes":[{"Abteilung":"HR"},{"Geschlecht":"männlich"},{"Alter","30"}]},
+                    ],
+                  "edges":
+                    [
+                      {"id": "e0","source": "72e0faf8-f9fb-485e-89e1-061e46c57f27","target": "c9614a92-868b-4cfa-b6c7-b638082e595e","size": "5","date": "2014-11-11T10:32:00Z"},
+                      {"id": "e1","source": "49b2749d-ab97-4763-ab60-0cd0ffe817b1","target": "6fc2e448-ac57-4c95-8676-6435359c1697","size": "5","date": "2014-11-14T18:54:00Z"},
+                      {"id": "e2","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "d01af8dc-5d5f-4679-85ee-286b715bcbfb","size": "3","date": "2014-10-31T11:33:00Z"},
+                      {"id": "e3","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "452f1e1d-f8ee-4ade-a569-2c8392e310c2","size": "2","date": "2014-10-31T11:30:00Z"}                    
+                    ]
+                }
+        500:
+          description: Error, see description
