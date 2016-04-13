@@ -811,12 +811,12 @@ protocols: [HTTPS]
           description: Timespan start
           type: date
           required: true
-          example: 2015-01-01
+          example: "2015-01-01"
         DateTo:
           description: Timespan end
           type: date
           required: true
-          example: 2015-12-31
+          example: "2015-12-31"
         RecordCount:
           description: Number of Records, the service should give; default is empty (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by date desc. 
           type: integer
@@ -826,7 +826,7 @@ protocols: [HTTPS]
           description: see parameter RecordCount 
           type: date
           required: false
-          example: 2015-01-01
+          example: "2015-01-01"
         DateFromTime:
           description: Timespan start time
           type: string
@@ -873,12 +873,12 @@ protocols: [HTTPS]
           description: Timespan start
           type: date
           required: true
-          example: 2015-01-01
+          example: "2015-01-01"
         DateTo:
           description: Timespan end
           type: date
           required: true
-          example: 2015-12-31
+          example: "2015-12-31"
         RecordCount:
           description: Number of Records, the service should give; default is empty (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by date desc. 
           type: integer
@@ -888,7 +888,7 @@ protocols: [HTTPS]
           description: see parameter RecordCount 
           type: date
           required: false
-          example: 2015-01-01
+          example: "2015-01-01"
         DateFromTime:
           description: Timespan start time
           type: string
@@ -1124,22 +1124,22 @@ protocols: [HTTPS]
           description: From
           type: date
           required: true
-          example: 2015-1-1
+          example: "2015-01-01"
         dateto:
           description: To
           type: date
           required: true
-          example: 2015-1-1
+          example: "2015-01-01"
         datefromtime:
           description: FromTime
           type: string
           required: false
-          example: 10:00:00
+          example: "10:00:00"
         datetotime:
           description: ToTime
           type: string
           required: false
-          example: 10:00:00
+          example: "10:00:00"
       responses:
         200:
           description: OK, here is the data for the map
@@ -1180,22 +1180,22 @@ protocols: [HTTPS]
           description: From
           type: date
           required: true
-          example: 2015-1-1
+          example: "2015-01-01"
         dateto:
           description: To
           type: date
           required: true
-          example: 2015-1-1
+          example: "2015-01-01"
         datefromtime:
           description: FromTime
           type: string
           required: false
-          example: 10:00:00
+          example: "10:00:00"
         datetotime:
           description: ToTime
           type: string
           required: false
-          example: 10:00:00
+          example: "10:00:00"
       responses:
         200:
           description: OK, here is the data for the map
