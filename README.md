@@ -13,6 +13,13 @@ This project hosts the staRHs api documentation. The API definition is copied fr
     curl -v -H "APIKey: …" -H "APIUser: …" -H "APIPassword: …" https://services.digital-bauhaus.solutions/RH-API/V0.93/session/get-LoginToken
     # Create a session token for a user with his password
     curl -X POST -v -H "Content-Length: 0" -H "LoginToken: …" -H "UserID: …" -H "Password: …" https://services.digital-bauhaus.solutions/RH-API/V0.93/session/login-with-userid
+    
     # Fetch the employee list
     curl -v -H "SessionToken: …" https://services.digital-bauhaus.solutions/RH-API/V0.93/profile/get-ClientEmployees
+    
+    # Fetch the received staRHs for 2016
+    curl -v -H "SessionToken: …" "https://services.digital-bauhaus.solutions/RH-API/V0.93/starhs/get-StarhsReceived?DateFrom=2016-01-01&DateFromTime=00:00:00&DateTo=2016-12-31&DateToTime=23:59:59"
+    
+    # Send mtacker a staRH
+    curl -v -H "SessionToken: …" "https://services.digital-bauhaus.solutions/RH-API/V0.93/starhs/share-Starh?ToID=f5e5f697-7fe5-40bc-8ce9-439f222b16dd&NoOfStaRHs=1&Message=Test+from+curl"
 
