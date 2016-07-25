@@ -691,10 +691,10 @@ protocols: [HTTPS]
           required: false
           example: 1000
         RecordStart:
-          description: Defines the Start-Value of the Selection limited by RecordCount.
-          type: integer
+          description: If provided, limits the result to users whose names start with the string
+          type: string
           required: false
-          example: 1000
+          example: "John"
       responses:
         200:
           description: OK, here's the list of users
