@@ -1,6 +1,6 @@
 #%RAML 0.8
 title: RH-StaRHs
-version: V0.93
+version: V0.94
 baseUri: https://services.digital-bauhaus.solutions/RH-API/{version}
 mediaType: application/json
 protocols: [HTTPS]
@@ -9,7 +9,7 @@ protocols: [HTTPS]
   displayName: Session
   description: Namespace for SessionHandling
   /get-LoginToken:
-    description: --DevStatus ready to use--<br/> If you want to interact with the API, you first have to request a LoginToken. Within 1 Minute you have to use this LoginToken to Login to the API. If you don't login in this timespan, the LoginToken get's invalid. After a login succeeded, you get a SessionToken to fire up requests to the API. 
+    description: If you want to interact with the API, you first have to request a LoginToken. Within 1 Minute you have to use this LoginToken to Login to the API. If you don't login in this timespan, the LoginToken get's invalid. After a login succeeded, you get a SessionToken to fire up requests to the API.
     get:
       headers:
         APIKey:
@@ -42,7 +42,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /login-with-userid:
-    description: --DevStatus ready to use--<br/> Login with UserID and password. If the combination of UserID and password is found you will get a valid SessionToken.  
+    description: Login with UserID and password. If the combination of UserID and password is found you will get a valid SessionToken.
     post:
       headers:
         LoginToken:
@@ -79,7 +79,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /login-with-email:
-    description: --DevStatus ready to use--<br/> Login with EMailAdress and password. If the combination of EMailAdress and password is found you will get a valid SessionToken.  
+    description: Login with EMailAdress and password. If the combination of EMailAdress and password is found you will get a valid SessionToken.
     post:
       headers:
         LoginToken:
@@ -116,7 +116,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /logout:
-    description: --DevStatus ready to use--<br/> Method logsout the user and will end the Session that is connected with the actual SessionToken.  
+    description: Method logsout the user and will end the Session that is connected with the actual SessionToken.
     post:
       headers:
         SessionToken:
@@ -134,20 +134,20 @@ protocols: [HTTPS]
             application/json:
               example: |
                 {
-                  "data": 
+                  "data":
                     {
                     "Result": "OK, User has been loged out"
                     }
-                    , 
+                    ,
                   "success": true,
                   "status": 200
                 }
         400:
           description: Bad Request
         401:
-          description: Unauthorized 
+          description: Unauthorized
   /set-SessionTimeout:
-    description: --DevStatus ready to use--<br/> To interact with the API you need a valid SessionToken. By default the inactivity-time of a sesion is 60 minutes. So if a user does not interact with the API for 60 minutes the session get's invalid and the user has to Login again (and before this, he has to request a new LoginToken). You can set the session-timeout to 0 (the session expires immediately, x (any int value, the session expires after x minutes).
+    description: To interact with the API you need a valid SessionToken. By default the inactivity-time of a sesion is 60 minutes. So if a user does not interact with the API for 60 minutes the session get's invalid and the user has to Login again (and before this, he has to request a new LoginToken). You can set the session-timeout to 0 (the session expires immediately, x (any int value, the session expires after x minutes).
     post:
       headers:
         SessionToken:
@@ -175,7 +175,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-SessionInfo:
-    description: --DevStatus ready to use--<br/> Method gives you information about the actual Session.
+    description: Method gives you information about the actual Session.
     get:
       headers:
         SessionToken:
@@ -202,7 +202,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /set-DataMode:
-    description: --DevStatus ready to use--<br/> The API supports three DataModes. If you set the value to 1 (default) you will interact with the life-database, if you set the value to -1 you will interact with the PreProd-database and if you set the value to 0 you only get example-data.
+    description: --Concept!--<br/> The API supports three DataModes. If you set the value to 1 (default) you will interact with the life-database, if you set the value to -1 you will interact with the PreProd-database and if you set the value to 0 you only get example-data.
     post:
       headers:
         SessionToken:
@@ -233,7 +233,7 @@ protocols: [HTTPS]
   displayName: Profile
   description: Namespace for Profile of the actual User
   /get-PKUserFromUserID:
-    description: --DevStatus ready to use--<br/> This method gives back the PK of a given userid. This will be needed for recovering the password with get-new-password
+    description: This method gives back the PK of a given userid. This will be needed for recovering the password with get-new-password
     get:
       headers:
         APIKey:
@@ -270,7 +270,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-new-password:
-    description: --DevStatus ready to use--<br/> This method generates a new password and sends it to the user.
+    description: This method generates a new password and sends it to the user.
     get:
       headers:
         APIKey:
@@ -309,7 +309,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /set-new-password:
-    description: --DevStatus ready to use--<br/> Method takes the new password and stores it in the database. The validation of the password has to be done in the UI. Before changing the password, the user has to login.
+    description: Method takes the new password and stores it in the database. The validation of the password has to be done in the UI. Before changing the password, the user has to login.
     post:
       headers:
         SessionToken:
@@ -341,7 +341,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-userid:
-    description: --DevStatus ready to use--<br/> Method tries to find the userid for a given E-Mail and sends the userid to this E-Mail.
+    description: Method tries to find the userid for a given E-Mail and sends the userid to this E-Mail.
     get:
       headers:
         APIKey:
@@ -378,7 +378,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-Profile:
-    description: --DevStatus ready to use--<br/> Gives information about the actual user. User has to be logged in to call this method.
+    description: Gives information about the actual user. User has to be logged in to call this method.
     get:
       headers:
         SessionToken:
@@ -410,8 +410,8 @@ protocols: [HTTPS]
                   "Profile":"",
                   "UserID":"abc",
                   "InformByMail":true,
-                  "URLPicture":"http://starhs.net/profileimgs/054c4c50-c088-4ebf-8516-78bf8048e400.jpg",
-                  "Timezone":132, 
+                  "URLPicture":"https://starhs.net/profileimgs/054c4c50-c088-4ebf-8516-78bf8048e400.jpg",
+                  "Timezone":132,
                   "UserCanInvite":true,
                   "ShowStarMap":true,
                   "Feature1":"1",
@@ -434,11 +434,11 @@ protocols: [HTTPS]
                   "FeatureName8":"",
                   "FeatureName9":"",
                   "FeatureName10":""
-                } 
+                }
         500:
           description: Error, see description
   /set-Profile:
-    description: --DevStatus ready to use--<br/> Method updates the User-Profile with given information. User has to be logged in to call this method.  
+    description: Method updates the User-Profile with given information. User has to be logged in to call this method.
     post:
       headers:
         SessionToken:
@@ -556,7 +556,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-ProfilePicture:
-    description: --DevStatus ready to use--<br/> Method gives the URL of the User-Picture (if specified). Otherwise an empty string will be returned. User has to be logged in to call this method. 
+    description: Method gives the URL of the User-Picture (if specified). Otherwise an empty string will be returned. User has to be logged in to call this method.
     get:
       headers:
         SessionToken:
@@ -574,12 +574,12 @@ protocols: [HTTPS]
             application/json:
               example: |
                 {
-                  "URLPicture":"http://starhs.net/profileimgs/054c4c50-c088-4ebf-8516-78bf8048e400.jpg"
+                  "URLPicture":"https://starhs.net/profileimgs/054c4c50-c088-4ebf-8516-78bf8048e400.jpg"
                 }
         500:
           description: Error, see description
   /set-ProfilePicture:
-    description: --DevStatus concept--<br/> Method takes a Picture-File and saves it to the profile of the user. User has to be logged in to call this method. 
+    description: Method takes a Picture-File and saves it to the profile of the user. User has to be logged in to call this method.
     post:
       headers:
         SessionToken:
@@ -613,7 +613,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-ClientInfos:
-    description: --DevStatus ready to use--<br/> Method gives information about the client of the actual user. User has to be logged in to call this method. 
+    description: Method gives information about the client of the actual user. User has to be logged in to call this method.
     get:
       headers:
         SessionToken:
@@ -650,7 +650,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-ClientPicture:
-    description: --DevStatus ready to use--<br/> Method gives the URL of the Client-Picture (if specified). Otherwise an empty string will be returned. User has to be logged in to call this method. 
+    description: Method gives the URL of the Client-Picture (if specified). Otherwise an empty string will be returned. User has to be logged in to call this method.
     get:
       headers:
         SessionToken:
@@ -674,7 +674,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-ClientEmployees:
-    description: --DevStatus ready to use--<br/> Method gives a collection of all the users of the actual client. User has to be logged in to call this method.
+    description: Method gives a collection of all the users of the actual client. User has to be logged in to call this method.
     get:
       headers:
         SessionToken:
@@ -686,15 +686,15 @@ protocols: [HTTPS]
           example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
       queryParameters:
         RecordCount:
-          description: Number of Records, the service should give; default is -1 (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by name. 
+          description: Number of Records, the service should give; default is -1 (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by name. If a parameter RecordStart is given, all users with name>RecordStart-Parameter are selected
           type: integer
           required: false
           example: 1000
         RecordStart:
-          description: If provided, limits the result to users whose names start with the string
+          description: see parameter RecordCount
           type: string
           required: false
-          example: "John"
+          example: ert
       responses:
         200:
           description: OK, here's the list of users
@@ -760,7 +760,7 @@ protocols: [HTTPS]
   displayName: StaRHs
   description: Namespace for StaRHs
   /get-StarhsStatus:
-    description: --DevStatus ready to use--<br/> Method gives information about the StaRHs-Status of the actual client and user
+    description: Method gives information about the StaRHs-Status of the actual client and user
     get:
       headers:
         SessionToken:
@@ -791,15 +791,12 @@ protocols: [HTTPS]
                   "CycleStaRHsToShare":10,
                   "YouHaveShared":0,
                   "YouHaveReceived":3,
-                  "YouHaveLeft":10,
-                  "TotalShared": 177,
-                  "TotalReceived": 209,
-                  "ShowStarMap": true
+                  "YouHaveLeft":10
                 }
         500:
           description: Error, see description
   /get-StarhsShared:
-    description: --DevStatus ready to use--<br/> Method gives a collection of the shared staRHs within a given timespan for the actual user
+    description: Method gives a collection of the shared staRHs within a given timespan for the actual user
     get:
       headers:
         SessionToken:
@@ -814,14 +811,14 @@ protocols: [HTTPS]
           description: Timespan start
           type: date
           required: true
-          example: "2015-01-01"
+          example: 2015-01-01
         DateTo:
           description: Timespan end
           type: date
           required: true
-          example: "2015-12-31"
+          example: 2015-12-31
         RecordCount:
-          description: Number of Records, the service should give; default is empty (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by date desc. 
+          description: Number of Records, the service should give; default is empty (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by date desc.
           type: integer
           required: false
           example: 1000
@@ -829,7 +826,7 @@ protocols: [HTTPS]
           description: see parameter RecordCount
           type: date
           required: false
-          example: "2016-05-20 06:26:00"
+          example: 2015-01-01
         DateFromTime:
           description: Timespan start time
           type: string
@@ -861,7 +858,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-StarhsReceived:
-    description: --DevStatus ready to use--<br/> Method gives a collection of the received stRHs within a given timespan for the actual user
+    description: Method gives a collection of the received stRHs within a given timespan for the actual user
     get:
       headers:
         SessionToken:
@@ -876,14 +873,14 @@ protocols: [HTTPS]
           description: Timespan start
           type: date
           required: true
-          example: "2015-01-01"
+          example: 2015-01-01
         DateTo:
           description: Timespan end
           type: date
           required: true
-          example: "2015-12-31"
+          example: 2015-12-31
         RecordCount:
-          description: Number of Records, the service should give; default is empty (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by date desc. 
+          description: Number of Records, the service should give; default is empty (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by date desc.
           type: integer
           required: false
           example: 1000
@@ -891,7 +888,7 @@ protocols: [HTTPS]
           description: see parameter RecordCount
           type: date
           required: false
-          example: "2016-05-20 06:26:00"
+          example: 2015-01-01
         DateFromTime:
           description: Timespan start time
           type: string
@@ -929,7 +926,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /share-Starh:
-    description: --DevStatus ready to use--<br/> Method takes information for sharing a staRH and stores it in the database. If the user who gets the staRH want's to be informed by the system, an email will be generated
+    description: Method takes information for sharing a staRH and stores it in the database. If the user who gets the staRH want's to be informed by the system, an email will be generated
     get:
       headers:
         SessionToken:
@@ -972,7 +969,7 @@ protocols: [HTTPS]
   displayName: Push
   description: Namespace for ApplePushNotification
   /RegisterDevice:
-    description: --DevStatus concept--<br/> Method to register a new apple-device for a given user 
+    description: Method to register a new apple-device for a given user
     post:
       headers:
         SessionToken:
@@ -1000,7 +997,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /UnRegisterDevice:
-    description: --DevStatus concept--<br/> Method to unregister an apple-device of a user
+    description: Method to unregister an apple-device of a user
     post:
       headers:
         SessionToken:
@@ -1028,7 +1025,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /ResetBadgeCount:
-    description: --DevStatus concept--<br/> Method to reset the badge-Count of a user
+    description: Method to reset the badge-Count of a user
     post:
       headers:
         SessionToken:
@@ -1051,7 +1048,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /Push-StarWithoutLogin:
-    description: --DevStatus concept--<br/> Generate Push-Notification without login
+    description: Generate Push-Notification without login
     post:
       headers:
         APIKey:
@@ -1095,7 +1092,7 @@ protocols: [HTTPS]
   displayName: Map
   description: Namespace for StaRHMap
   /get-MapDataWithoutLogin:
-    description: --DevStatus ready to use--<br/> Method gives the information which is necessary for rendering the staRHMap
+    description: Method gives the information which is necessary for rendering the staRHMap
     get:
       headers:
         APIKey:
@@ -1127,22 +1124,22 @@ protocols: [HTTPS]
           description: From
           type: date
           required: true
-          example: "2015-01-01"
+          example: 2015-1-1
         dateto:
           description: To
           type: date
           required: true
-          example: "2015-01-01"
+          example: 2015-1-1
         datefromtime:
           description: FromTime
           type: string
           required: false
-          example: "10:00:00"
+          example: 10:00:00
         datetotime:
           description: ToTime
           type: string
           required: false
-          example: "10:00:00"
+          example: 10:00:00
       responses:
         200:
           description: OK, here is the data for the map
@@ -1168,7 +1165,7 @@ protocols: [HTTPS]
         500:
           description: Error, see description
   /get-MapDataWithSession:
-    description: --DevStatus ready to use--<br/> Method gives the information which is necessary for rendering the staRHMap
+    description: Method gives the information which is necessary for rendering the staRHMap
     get:
       headers:
         SessionToken:
@@ -1183,22 +1180,22 @@ protocols: [HTTPS]
           description: From
           type: date
           required: true
-          example: "2015-01-01"
+          example: 2015-1-1
         dateto:
           description: To
           type: date
           required: true
-          example: "2015-01-01"
+          example: 2015-1-1
         datefromtime:
           description: FromTime
           type: string
           required: false
-          example: "10:00:00"
+          example: 10:00:00
         datetotime:
           description: ToTime
           type: string
           required: false
-          example: "10:00:00"
+          example: 10:00:00
       responses:
         200:
           description: OK, here is the data for the map
