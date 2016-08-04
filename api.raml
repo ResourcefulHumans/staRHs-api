@@ -51,7 +51,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2        
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
         UserID:
           description: Userid StaRHs User
           type: string
@@ -88,7 +88,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2        
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
         EMail:
           description: EMail
           type: string
@@ -125,7 +125,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
       responses:
         200:
@@ -156,7 +156,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         newsessiontimeout:
           description: The value for the new session-timeout in minutes
@@ -184,7 +184,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
       responses:
         200:
@@ -211,10 +211,10 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         newdatamode:
-          description: New DataMode value 
+          description: New DataMode value
           type: integer
           required: true
           example: 0
@@ -257,7 +257,7 @@ protocols: [HTTPS]
           description: Userid StaRHs User
           type: string
           required: true
-          example: pmustermann 
+          example: pmustermann
       responses:
         200:
           description: OK, here ist the PK
@@ -318,14 +318,14 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
         OldPassword:
-          description: Old password of the user, who is logged in 
+          description: Old password of the user, who is logged in
           type: string
           required: true
           example: myOldPassword
         NewPassword:
-          description: New password for the user, who is logged in 
+          description: New password for the user, who is logged in
           type: string
           required: true
           example: myNewPassword
@@ -362,7 +362,7 @@ protocols: [HTTPS]
           required: true
           example: xa4g&z76!
         EMail:
-          description: The eMailAdress of the user, who want's to recover his userid 
+          description: The eMailAdress of the user, who want's to recover his userid
           type: string
           required: true
           example: myNewPassword
@@ -387,7 +387,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       responses:
         200:
           description: OK, here is the Info of the user
@@ -447,7 +447,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         Salutation:
           description: Salutation
@@ -565,7 +565,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
       responses:
         200:
@@ -588,25 +588,25 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         Picture:
-          description: Picture 
+          description: Picture
           type: string
           required: true
-          example: 
+          example:
       responses:
         200:
-          description: OK, new picture was saved 
+          description: OK, new picture was saved
           body:
             application/json:
               example: |
                 {
-                  "data": 
+                  "data":
                     {
                     "Result": "OK, new picture was saved"
                     }
-                    , 
+                    ,
                   "success": true,
                   "status": 200
                 }
@@ -622,7 +622,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
       responses:
         200:
@@ -659,7 +659,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
       responses:
         200:
@@ -683,7 +683,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         RecordCount:
           description: Number of Records, the service should give; default is -1 (all records); otherwise you can specify how much records should be returned. In combination with the parameter RecordStart you can define the Start-Value of the Selection. Record-Order is by name. If a parameter RecordStart is given, all users with name>RecordStart-Parameter are selected
@@ -769,7 +769,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
       responses:
         200:
@@ -805,7 +805,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         DateFrom:
           description: Timespan start
@@ -844,14 +844,14 @@ protocols: [HTTPS]
             application/json:
               example: |
                 {
-                  "data": 
+                  "data":
                     [
                       {"To":"Peter Mustermann","ToID":"bdacc958-0db9-4804-9b4a-a3bdc3e0c60c","ToURLPicture":"https://starhs.net/profileimg/abc.jpg","No":"1","Reason":"Your support on...","Date":"10.11.2015 21:43:00"},
                       {"To":"Peter Mustermann","ToID":"bdacc958-0db9-4804-9b4a-a3bdc3e0c60c","ToURLPicture":"https://starhs.net/profileimg/abc.jpg","No":"1","Reason":"Your support on...","Date":"10.11.2015 21:43:00"},
                       {"To":"Peter Mustermann","ToID":"bdacc958-0db9-4804-9b4a-a3bdc3e0c60c","ToURLPicture":"https://starhs.net/profileimg/abc.jpg","No":"1","Reason":"Your support on...","Date":"10.11.2015 21:43:00"},
                       {"To":"Peter Mustermann","ToID":"bdacc958-0db9-4804-9b4a-a3bdc3e0c60c","ToURLPicture":"https://starhs.net/profileimg/abc.jpg","No":"1","Reason":"Your support on...","Date":"10.11.2015 21:43:00"},
                     ]
-                    , 
+                    ,
                   "success": true,
                   "status": 200
                 }
@@ -867,7 +867,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         DateFrom:
           description: Timespan start
@@ -935,10 +935,10 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         ToID:
-          description: GUID of user who will get the staRH 
+          description: GUID of user who will get the staRH
           type: string
           minLength: 36
           maxLength: 36
@@ -978,10 +978,10 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         DeviceID:
-          description: ID of the apple device that should be registered 
+          description: ID of the apple device that should be registered
           type: string
           required: true
           example: 21fa040d-9073-4928-b3f9-6839b384f169
@@ -1006,10 +1006,10 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
         DeviceID:
-          description: ID of the apple device that should be unregistered 
+          description: ID of the apple device that should be unregistered
           type: string
           required: true
           example: 21fa040d-9073-4928-b3f9-6839b384f169
@@ -1034,7 +1034,7 @@ protocols: [HTTPS]
           minLength: 36
           maxLength: 36
           required: true
-          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2                
+          example: 8dfb0f07-6f6a-4dfd-9041-adca472649d2
       queryParameters:
       responses:
         200:
@@ -1159,7 +1159,7 @@ protocols: [HTTPS]
                       {"id": "e0","source": "72e0faf8-f9fb-485e-89e1-061e46c57f27","target": "c9614a92-868b-4cfa-b6c7-b638082e595e","size": "5","date": "2014-11-11T10:32:00Z"},
                       {"id": "e1","source": "49b2749d-ab97-4763-ab60-0cd0ffe817b1","target": "6fc2e448-ac57-4c95-8676-6435359c1697","size": "5","date": "2014-11-14T18:54:00Z"},
                       {"id": "e2","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "d01af8dc-5d5f-4679-85ee-286b715bcbfb","size": "3","date": "2014-10-31T11:33:00Z"},
-                      {"id": "e3","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "452f1e1d-f8ee-4ade-a569-2c8392e310c2","size": "2","date": "2014-10-31T11:30:00Z"}                    
+                      {"id": "e3","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "452f1e1d-f8ee-4ade-a569-2c8392e310c2","size": "2","date": "2014-10-31T11:30:00Z"}
                     ]
                 }
         500:
@@ -1215,7 +1215,7 @@ protocols: [HTTPS]
                       {"id": "e0","source": "72e0faf8-f9fb-485e-89e1-061e46c57f27","target": "c9614a92-868b-4cfa-b6c7-b638082e595e","size": "5","date": "2014-11-11T10:32:00Z"},
                       {"id": "e1","source": "49b2749d-ab97-4763-ab60-0cd0ffe817b1","target": "6fc2e448-ac57-4c95-8676-6435359c1697","size": "5","date": "2014-11-14T18:54:00Z"},
                       {"id": "e2","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "d01af8dc-5d5f-4679-85ee-286b715bcbfb","size": "3","date": "2014-10-31T11:33:00Z"},
-                      {"id": "e3","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "452f1e1d-f8ee-4ade-a569-2c8392e310c2","size": "2","date": "2014-10-31T11:30:00Z"}                    
+                      {"id": "e3","source": "e8a4acea-6f26-44ef-8077-214aa168a0b0","target": "452f1e1d-f8ee-4ade-a569-2c8392e310c2","size": "2","date": "2014-10-31T11:30:00Z"}
                     ]
                 }
         500:
