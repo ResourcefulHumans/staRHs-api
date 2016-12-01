@@ -21,6 +21,6 @@
   },
   "homepage": "https://github.com/ResourcefulHumans/staRHs-api#readme",
   "dependencies": {
-    "raml2html": "^3.0.0"
+    "raml2html": "<4.0.0"
   }
 }
