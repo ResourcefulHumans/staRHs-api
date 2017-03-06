@@ -601,15 +601,7 @@ protocols: [HTTPS]
           body:
             application/json:
               example: |
-                {
-                  "data":
-                    {
-                    "Result": "OK, new picture was saved"
-                    }
-                    ,
-                  "success": true,
-                  "status": 200
-                }
+                {"Message": "Picture upload and update successfull"}
         500:
           description: Error, see description
   /get-ClientInfos:
