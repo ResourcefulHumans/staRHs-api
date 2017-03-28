@@ -7,6 +7,10 @@ A HTML version is generated via TravisCI and published at [resourcefulhumans.git
 
 This project hosts the staRHs api documentation. The API definition is copied from [anypoint.mulesoft.com/apiplatform/digitalbauhaus-gmbh](https://anypoint.mulesoft.com/apiplatform/digitalbauhaus-gmbh/#/portals/organiz18/pages/54810)
 
+## Credentials
+
+All request need an API Key, a username, and a password which are provided by Digital Bauhaus. 
+
 ## CURL recipes
 
     # Create a login token 
